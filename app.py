@@ -55,6 +55,7 @@ async def manifest_standard(request: Request):
         'catalogs': [],
         'types': ["movie", "series", "tv"],
         'resources': ["catalog", "meta", "stream"],
+        'stremioAddonsConfig': {"issuer": "https://stremio-addons.net", "signature": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..CdOKAUXKcIQZ1CcSgKGblg.OQxTjB33EZcXQ8oPxPstMjb8cBQFJ9GAHsIRONDh8ymt-Cmf95Dv1Kgn4s6g8sveKWXdVxLpkmm7jh7tfiRYsOhwPvuycSmEGCzz0e6lk7aNjn9DOZkl5gMYZ0Vmw46w.qUta7YhMEsAOaNyoiAuWIw"},
         'behaviorHints': {'configurable': True, 'configurationRequired': True}
     }
     return add_cors(JSONResponse(content=manifest))
@@ -106,30 +107,3 @@ async def meta(base64str: str, type: str, id: str, request: Request):
 async def stream(base64str: str, type: str, id: str, request: Request):   
     streams = get_stream(base64str, type, id)
     return add_cors(JSONResponse(content={"streams": streams.get("streams", [])}))
-
-# if __name__ == "__main__":
-#     try:
-#         if "--run" in sys.argv:
-#             from uvicorn import Server, Config as Config_
-#             config_ = Config_(app=app, host="0.0.0.0", port=80)
-#             server = Server(config_)
-#             server.run()
-#     except:
-#         pass
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-    
-
